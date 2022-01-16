@@ -9,7 +9,7 @@ export class ProductService {
   private url = `${environment.serviceUrl}/product`
   constructor(private http: HttpClient) { }
 
-  getProductById(id: any){
+  getProductById(id: any) {
     console.log(id);
     let getUrl = `${this.url}/${id}`;
     console.log(getUrl);
@@ -34,5 +34,17 @@ export class ProductService {
       .pipe(map((res) => {
         return res;
       }));
+  }
+
+  addReview(id: any, review: any) {
+    let patchUrl = `${this.url}/${id}`;
+    return this.http.patch<any>(patchUrl, review)
+      .pipe(map((res) => {
+        return res;
+      }));
+  }
+  deleteProduct(id: any){
+    let deleteUrl = `${this.url}/${id}`;
+    return this.http.delete<any>(deleteUrl);
   }
 }

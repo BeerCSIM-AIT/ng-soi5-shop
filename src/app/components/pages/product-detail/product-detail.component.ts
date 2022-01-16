@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from "src/app/service/product.service";
 
 @Component({
@@ -10,15 +10,28 @@ import { ProductService } from "src/app/service/product.service";
 export class ProductDetailComponent implements OnInit {
   id: any;
   product: any;
-  constructor(private ps: ProductService, private activatedRoute: ActivatedRoute) { }
+  review: Review = new Review();
+  constructor(private ps: ProductService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-    });
-    this.ps.getProductById(this.id).subscribe((res)=>{
-      this.product = res.data;
+      this.ps.getProductById(this.id).subscribe((res) => {
+        this.product = res.data;
+      });
     });
   }
+  addReview() {
+    this.ps.addReview(this.id, this.review).subscribe(res => {
+      console.log(res);
+      this.router.navigateByUrl('/', { skipLocationChange: true })
+        .then(()=> this.router.navigate([`/product/detail/${this.id}`]));
+    });
+  }
+}
 
+class Review {
+  star: number = 0;
+  comment: string = "";
 }
