@@ -9,8 +9,10 @@ import { MainComponent } from './components/pages/main/main.component';
 import { NewProductComponent } from './components/pages/new-product/new-product.component';
 import { EditProductComponent } from './components/pages/edit-product/edit-product.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ProductDetailComponent } from './components/pages/product-detail/product-detail.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { HttpConfigInterceptor } from './helper/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { ProductDetailComponent } from './components/pages/product-detail/produc
     MainComponent,
     NewProductComponent,
     EditProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,13 @@ import { ProductDetailComponent } from './components/pages/product-detail/produc
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpConfigInterceptor,
+        multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

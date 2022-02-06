@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  serviceUrl: "http://localhost:4000"
+    production: false,
+    //   serviceUrl: "https://soi5-shop-mongoose-api.herokuapp.com"
+    // serviceUrl: "https://beeris-rest-api.herokuapp.com",
+    serviceUrl: "http://localhost:4000"
 };
 
 /*

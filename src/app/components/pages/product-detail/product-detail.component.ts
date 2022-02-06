@@ -29,6 +29,12 @@ export class ProductDetailComponent implements OnInit {
         .then(()=> this.router.navigate([`/product/detail/${this.id}`]));
     });
   }
+  
+  createRange(n){
+      let a = new Array(n);
+      console.log(a);
+      return a;
+  }
 }
 
 class Review {

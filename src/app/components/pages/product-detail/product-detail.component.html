@@ -60,6 +60,9 @@
                                 <div class="row mt-1">
                                     <div class="col">
                                         <p class="h6">Stars: {{ review.star }}</p>
+                                        <p>
+                                            <span class="fa fa-star checked" style="color:orange;" *ngFor="let item of createRange(review.star)"></span>
+                                        </p>
                                         <p>{{review.comment}}</p>
                                     </div>
                                 </div>

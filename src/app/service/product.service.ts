@@ -17,6 +17,7 @@ export class ProductService {
   }
   getProducts(): any {
     console.log(this.url);
+    console.log(this.http.get<any>(this.url));
     return this.http.get<any>(this.url);
   }
 
